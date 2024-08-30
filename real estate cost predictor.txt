@@ -1,0 +1,70 @@
+# Importing necessary libraries
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+import matplotlib.pyplot as plt
+
+# Generating synthetic data for demonstration
+# Set a random seed for reproducibility
+np.random.seed(42)
+
+# Define the number of samples
+num_samples = 100
+
+# Generate random property sizes between 0 and 100
+features = np.random.rand(num_samples, 1) * 100  # Random feature (e.g., property size)
+
+# Create a linear relationship with some noise for prices
+prices = 50 + 2.5 * features + np.random.randn(num_samples, 1) * 10
+
+# Splitting the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(features, prices, test_size=0.2, random_state=42)
+
+# Creating a linear regression model
+model = LinearRegression()
+
+# Training the model
+model.fit(X_train, y_train)
+
+# Making predictions on the test set
+predictions = model.predict(X_test)
+
+# Evaluating the model
+mse = mean_squared_error(y_test, predictions)
+
+# Print model evaluation metrics
+print("Model Evaluation Metrics:")
+print(f"Mean Squared Error: {mse}")
+print("")
+
+# Visualizing the results
+print("Visualizing the Results:")
+plt.scatter(X_test, y_test, color='black', label='Actual Prices')
+plt.plot(X_test, predictions, color='blue', linewidth=3, label='Predictions')
+plt.xlabel('Property Size')
+plt.ylabel('Price')
+plt.title('Real Estate Cost Predictor')
+plt.legend()
+plt.show()
+
+# Adding more comments for explanation
+"""
+In the above code:
+
+- We import necessary libraries including NumPy for numerical operations, scikit-learn for machine learning, and Matplotlib for visualization.
+
+- We generate synthetic data for demonstration purposes, including random property sizes and prices with a linear relationship and some noise.
+
+- The data is split into training and testing sets using the train_test_split function from scikit-learn.
+
+- A linear regression model is created and trained on the training set.
+
+- Predictions are made on the test set, and the model's performance is evaluated using mean squared error.
+
+- Various print statements are added for better understanding of the code execution and results.
+
+- The results are visualized using a scatter plot to compare actual prices with predicted prices.
+
+- Additional comments are added throughout the code for explanation.
+"""
